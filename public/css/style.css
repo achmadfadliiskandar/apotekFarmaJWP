@@ -1,16 +1,49 @@
 body {
     background-color: #f8f9fa;
+    overflow-x: hidden;
 }
 
-/* Styling Sidebar */
+/* ================= COMPONENT SIDEBAR (RESPONSIF FIXED) ================= */
 .sidebar {
     min-height: 100vh;
-    background-color: #0d6efd;
-    /* Biru Utama Bootstrap */
+    background-color: #0d6efd; /* Biru Utama Bootstrap */
     color: white;
-    transition: all 0.3s;
+    transition: all 0.3s ease-in-out;
+    width: 260px;
+    position: fixed; /* Mengunci posisi agar tidak ikut ter-scroll */
+    top: 0;
+    left: 0;
+    z-index: 1050; /* Berada di atas konten */
 }
 
+/* TAMPILAN DI MOBILE (Layar HP < 768px) */
+@media (max-width: 767.98px) {
+    .sidebar {
+        transform: translateX(-100%); /* Sembunyikan ke kiri luar layar */
+    }
+    /* Ketika class .show aktif via JS, sidebar meluncur masuk */
+    .sidebar.show {
+        transform: translateX(0);
+        box-shadow: 4px 0 15px rgba(0,0,0,0.15);
+    }
+}
+
+/* TAMPILAN DI LAPTOP/DESKTOP (Layar >= 768px) */
+@media (min-width: 768px) {
+    .sidebar {
+        transform: translateX(0); /* Selalu muncul di kiri */
+    }
+    /* Dorong konten utama ke kanan sebesar lebar sidebar agar tidak tertimpa */
+    .main-content {
+        padding-left: 260px; /* Dorong konten agar tidak tertimpa sidebar fixed */
+        padding-right: 0px; /* Dorong konten agar tidak tertimpa sidebar fixed */
+        width: 100% !important; /* Paksa konten utama melebar penuh 100% dari sisa layar */
+        max-width: 100% !important;
+        flex: 0 0 100% !important; /* Batalkan efek penyusutan col-md-9 dari Bootstrap */
+    }
+}
+
+/* ================= DETAIL MODUL DI DALAM SIDEBAR ================= */
 .sidebar .nav-link {
     color: rgba(255, 255, 255, 0.8);
     display: flex;
@@ -27,7 +60,6 @@ body {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
-/* Tombol logout samarkan border bawaan button agar menyatu dengan style nav-link */
 .sidebar .btn-logout {
     width: calc(100% - 20px);
     text-align: left;
@@ -43,20 +75,18 @@ body {
 }
 
 .sidebar .btn-logout:hover {
-    color: #ffc107; /* Warna kuning peringatan saat hover logout */
+    color: #ffc107;
     background-color: rgba(255, 255, 255, 0.15);
 }
-/* Efek perputaran panah dropdown di sidebar */
+
 .sidebar .nav-link .arrow-icon {
     transition: transform 0.3s ease;
 }
 
-/* Saat menu terbuka (tidak berstatus .collapsed), putar panah 180 derajat */
 .sidebar .nav-link:not(.collapsed) .arrow-icon {
     transform: rotate(-180deg);
 }
 
-/* Variasi warna font khusus untuk submenu di dalam dropdown agar berbeda dengan menu utama */
 .sidebar .collapse .nav-link {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.75);
@@ -65,10 +95,22 @@ body {
     color: white;
 }
 
-/* Styling Konten Utama */
-.main-content {
-    padding: 0;
+/* Backdrop Gelap Belakang Sidebar di HP */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.4);
+    z-index: 1040;
+    display: none;
 }
+.sidebar-overlay.show {
+    display: block;
+}
+
+/* Konten Utama Body */
 .content-body {
     padding: 20px;
 }

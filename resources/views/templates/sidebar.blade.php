@@ -1,6 +1,18 @@
-<div class="col-md-3 col-lg-2 px-0 sidebar d-flex flex-column">
-    <div class="p-3 text-center border-bottom border-white border-opacity-25">
+<nav class="navbar navbar-light bg-white d-md-none border-bottom px-3 sticky-top">
+    <button class="navbar-toggler border-0 p-0 shadow-none" type="button" id="btnSidebarToggle">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <span class="navbar-brand fw-bold text-primary mb-0 small">JeWePE Farma</span>
+</nav>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="sidebar d-flex flex-column" id="sidebarMenu">
+    <div class="p-3 d-flex justify-content-between align-items-center border-bottom border-white border-opacity-25" style="height: 61px;">
         <h5 class="fw-bold mb-0 text-white"><i class="bi bi-capsule-capsule me-2"></i>JeWePE Farma</h5>
+        <button class="btn text-white d-md-none border-0 p-0 fs-4 shadow-none" id="btnSidebarClose">
+            <i class="bi bi-x-lg"></i>
+        </button>
     </div>
 
     <ul class="nav flex-column mt-3 flex-grow-1">
@@ -103,7 +115,7 @@
             </a>
         </li>
         
-        <li class="nav-item mt-2">
+        <li class="nav-item mt-2 mb-4">
             <form action="{{ url('logout') }}" method="POST">
                 @csrf 
                 <button type="submit" class="btn-logout">
