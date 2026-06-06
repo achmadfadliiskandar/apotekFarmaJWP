@@ -3,6 +3,16 @@
 @section('title', 'Laporan Mutasi Obat')
 
 @section('content')
+    @if (session('warning'))
+        <div class="alert alert-warning alert-dismissible fade show border-0 shadow-sm d-flex align-items-center gap-2"
+            role="alert">
+            <i class="bi bi-exclamation-triangle-fill fs-5 text-warning"></i>
+            <div class="small fw-semibold text-dark">
+                {{ session('warning') }}
+            </div>
+            <button type="button" class="btn-close shadow-none" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <div class="container-fluid px-0">
 
         <div class="mb-4">
@@ -52,30 +62,39 @@
                         </div>
                     </div>
                 </form>
-                <div class="col-md-4  my-3">
+
+                <div class="row mt-3">
+                    <div class="col-md-4">
                         <div class="row g-2">
                             {{-- Tombol PDF --}}
                             <div class="col-6">
-                                <a href="{{ route('laporan.pdf', request()->query()) }}" class="btn btn-danger d-flex align-items-center justify-content-center gap-2 shadow-sm fw-semibold w-100" title="Cetak PDF">
+                                <a href="{{ route('laporan.pdf', request()->query()) }}"
+                                    class="btn btn-danger d-flex align-items-center justify-content-center gap-2 shadow-sm fw-semibold w-100"
+                                    title="Cetak PDF">
                                     <i class="bi bi-file-earmark-pdf-fill"></i> PDF
                                 </a>
                             </div>
 
                             {{-- Tombol Excel --}}
                             <div class="col-6">
-                                <a href="{{ route('laporan.excel', request()->query()) }}" class="btn btn-success d-flex align-items-center justify-content-center gap-2 shadow-sm fw-semibold w-100" title="Ekspor Excel">
+                                <a href="{{ route('laporan.excel', request()->query()) }}"
+                                    class="btn btn-success d-flex align-items-center justify-content-center gap-2 shadow-sm fw-semibold w-100"
+                                    title="Ekspor Excel">
                                     <i class="bi bi-file-earmark-excel-fill"></i> Excel
                                 </a>
                             </div>
                         </div>
 
                         @if (request('tanggal_awal') || request('tanggal_akhir'))
-                            <a href="{{ route('laporan') }}" class="btn btn-light border d-flex align-items-center justify-content-center gap-2 w-100 small text-secondary" title="Reset Filter">
+                            <a href="{{ route('laporan') }}"
+                                class="btn btn-light border d-flex align-items-center justify-content-center gap-2 w-100 small text-secondary mt-2"
+                                title="Reset Filter">
                                 <i class="bi bi-arrow-clockwise"></i> Reset Pencarian
                             </a>
                         @endif
                     </div>
                 </div>
+
             </div>
         </div>
 
@@ -95,7 +114,7 @@
             </div>
             <div class="card-body p-0">
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle mb-0">
+                    <table class="table table-hover align-middle mb-0" id="myTable">
                         <thead class="table-light text-secondary small">
                             <tr>
                                 <th class="ps-4 py-3" style="width: 70px;">No</th>
@@ -169,8 +188,8 @@
                             @else
                                 <tr>
                                     <td colspan="7" class="text-center py-5 text-muted">
-                                        <div class="mb-2"><i class="bi bi-cloud-arrow-down text-primary fs-2 opacity-50"></i>
-                                        </div>
+                                        <div class="mb-2"><i
+                                                class="bi bi-cloud-arrow-down text-primary fs-2 opacity-50"></i></div>
                                         <span class="d-block small fw-semibold">Menghubungkan rekap data log gudang...</span>
                                     </td>
                                 </tr>

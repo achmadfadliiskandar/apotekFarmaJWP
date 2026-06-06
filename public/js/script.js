@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // sidebar menu mobile
     const sidebar = document.getElementById("sidebarMenu");
     const overlay = document.getElementById("sidebarOverlay");
     const btnToggle = document.getElementById("btnSidebarToggle");
@@ -21,4 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Jalankan penutupan jika tombol silang atau area hitam luar diklik
     if (btnClose) btnClose.addEventListener("click", closeSidebar);
     if (overlay) overlay.addEventListener("click", closeSidebar);
+
+    // data tables
+    new DataTable('#myTable');
 });

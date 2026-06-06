@@ -80,12 +80,11 @@
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-hover align-middle mb-0">
+                <table class="table table-hover align-middle mb-0" id="myTable">
                     <thead class="table-light text-secondary small">
                         <tr>
                             <th class="ps-4 py-3" style="width: 70px;">No</th>
                             <th class="py-3">Tanggal</th>
-                            <th class="py-3">Kode Transaksi</th>
                             <th class="py-3">Nama Obat</th>
                             <th class="py-3">Jumlah Keluar</th>
                             <th class="py-3">Keterangan / Alasan</th>
@@ -99,7 +98,6 @@
                                 <tr>
                                     <td class="ps-4 fw-semibold text-secondary">{{ $index + 1 }}</td>
                                     <td class="text-muted">{{ \Carbon\Carbon::parse($mutasi->tanggal)->translatedFormat('d M Y H:i') }}</td>
-                                    <td><span class="badge bg-light text-dark border px-2 py-1.5 fw-mono">{{ $mutasi->kode_transaksi }}</span></td>
                                     <td class="fw-bold text-danger">{{ $mutasi->daftarObat->nama_obat ?? 'Obat Dihapus' }}</td>
                                     <td>
                                         <span class="text-danger fw-bold"> -{{ $mutasi->jumlah }}</span> 

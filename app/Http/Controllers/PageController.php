@@ -98,6 +98,10 @@ class PageController extends Controller
      */
     public function laporanIndex(Request $request)
     {
+        // 1. Cek jika kedua input tanggal_awal DAN tanggal_akhir kosong saat tombol filter ditekan
+        if ($request->isMethod('get') && $request->has(['tanggal_awal', 'tanggal_akhir']) && !$request->filled('tanggal_awal') && !$request->filled('tanggal_akhir')) {
+            return redirect()->route('laporan')->with('warning', 'Silakan pilih rentang tanggal awal dan tanggal akhir terlebih dahulu!');
+        }
         $query = MutasiObat::with(['daftarObat', 'user']);
 
         // 2. Jika input filter 'tanggal_awal' diisi oleh user
@@ -109,6 +113,7 @@ class PageController extends Controller
         if ($request->filled('tanggal_akhir')) {
             $query->where('tanggal', '<=', $request->tanggal_akhir);
         }
+        
         // 4. Ambil datanya dengan urutan transaksi paling baru berada di paling atas tabel
         $semuaMutasi = $query->orderBy('tanggal', 'desc')->get();
         // 5. Kirim data variabel $semuaMutasi ke halaman view laporan.blade.php
