@@ -24,5 +24,11 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin_utama',
             'password' => Hash::make('password123'),
         ]);
+        // $this->call([
+        //     DaftarObatSeeder::class,
+        // ]);
     }
 }
+// php artisan migrate:fresh --seed
+// php artisan db:seed --class=DaftarObatSeeder
+// php artisan db:seed

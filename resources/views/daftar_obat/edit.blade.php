@@ -24,7 +24,7 @@
                 <div class="row g-3 mb-3">
                     <div class="col-md-4">
                         <label for="kode_obat" class="form-label fw-semibold small text-secondary">Kode Obat <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('kode_obat') is-invalid @enderror" id="kode_obat" name="kode_obat" value="{{ old('kode_obat', $obat->kode_obat) }}" required>
+                        <input type="text" class="form-control @error('kode_obat') is-invalid @enderror" id="kode_obat" name="kode_obat" readonly value="{{ old('kode_obat', $obat->kode_obat) }}" required>
                         @error('kode_obat') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
                     

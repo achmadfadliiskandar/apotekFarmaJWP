@@ -18,7 +18,11 @@ class DaftarObatController extends Controller
     public function create()
     {
         $kategori = KategoriObat::all();
-        return view('daftar_obat.create', compact('kategori'));
+        $idTerakhir = DaftarObat::max('id');
+        $nomorBerikutnya = $idTerakhir ? $idTerakhir + 1 : 1;
+        $angkaFormat = str_pad($nomorBerikutnya, 4, '0', STR_PAD_LEFT);
+        $kode_otomatis = 'OBT-' . $angkaFormat;
+        return view('daftar_obat.create', compact('kategori','kode_otomatis'));
     }
     public function store(Request $request)
     {

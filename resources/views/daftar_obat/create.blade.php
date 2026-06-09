@@ -33,7 +33,8 @@
                 <div class="row g-3 mb-3">
                     <div class="col-md-4">
                         <label for="kode_obat" class="form-label fw-semibold small text-secondary">Kode Obat <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control @error('kode_obat') is-invalid @enderror" id="kode_obat" name="kode_obat" value="{{ old('kode_obat') }}" placeholder="Contoh: OBT-0001" required>
+                        <input type="text" class="form-control bg-light @error('kode_obat') is-invalid @enderror" 
+                               id="kode_obat" name="kode_obat" value="{{ $kode_otomatis }}" readonly required>
                         @error('kode_obat') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
                     
